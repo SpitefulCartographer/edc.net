@@ -1,9 +1,9 @@
+import SignUp from "./SignUp";
+
 function App() {
-  return (
-    <div className="App">
-     
-    </div>
-  );
+	return (
+		<SignUp/>
+	);
 }
 
 export default App;
