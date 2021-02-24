@@ -19,7 +19,7 @@ export default function SignUp() {
 			setError("")
 			setLoading(true)
 			await login(emailRef.current.value, passwordRef.current.value)
-            history.pushState("/")
+            history.push("/")
 		} catch {
 			setError("Failed to login")
 		} finally {

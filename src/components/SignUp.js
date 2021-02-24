@@ -16,7 +16,6 @@ export default function SignUp() {
 		/** Prevent the component from refreshing */
 		e.preventDefault()
 
-		/** Check if both passwords match; if not display an error*/
 		if (passwordRef.current.value !== confirmPasswordRef.current.value) {
 			return setError("Passwords do not match.")
 		} else if (passwordRef.current.value.length < 6) {
