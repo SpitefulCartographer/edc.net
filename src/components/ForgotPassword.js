@@ -19,7 +19,7 @@ export default function ForgotPassword() {
 			setError("")
 			setLoading(true)
 			await resetPassword(emailRef.current.value)
-            setMessage("An email with instructions has been sent to your inbox.")
+            setMessage("An email with further instructions has been sent to your inbox.")
 		} catch {
 			setError("Failed to reset password")
 		} finally {
@@ -41,7 +41,9 @@ export default function ForgotPassword() {
 						<Button className="w-100" type="submit" disabled={loading}>Reset Password</Button>
 					</Form>
 				</Card.Body>
-                {message && <Alert varient="log">{message}</Alert>}
+                <div className="ml-3 mr-3 text-center">
+                    {message && <Alert variant="success">{message}</Alert>}
+                </div>
 			</Card>
 			<div className="text-center">
 				<Link to="/login">Return to login here.</Link>
