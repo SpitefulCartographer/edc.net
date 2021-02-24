@@ -44,6 +44,9 @@ export default function SignUp() {
 						</Form.Group>
 						<Button className="w-100" type="submit" disabled={loading}>Log In</Button>
 					</Form>
+                    <div className="text-center mt-3">
+                        <Link to="/password-reset">Forgot your password? Reset it here.</Link>
+                    </div>
 				</Card.Body>
 			</Card>
 			<div className="text-center">
