@@ -11,9 +11,19 @@ export function AuthProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState()
 	const [loading, setLoading] = useState(true)
 
-	function signup(email, password) {
-		/** Returns a promise that is used in SignUp.js */
+	function signup(email, password, username) {
+		/** Returns a promise that is used in SignUp.js 
+     * Creates a user with the provided email and password
+     * and sets the user's display name to the username.
+    */
 		return auth.createUserWithEmailAndPassword(email, password)
+    .then(result => {
+      result.user.updateProfile({
+        displayName: username
+      }).catch(error => {
+        console.log(error)
+      })
+    })
 	}
 
   function verification() {
@@ -22,8 +32,8 @@ export function AuthProvider({ children }) {
 
 	function login(email, password) {
 		/** Returns a promise that is used in LogIn.js */
-		return auth.signInWithEmailAndPassword(email, password) 
-	}
+		return auth.signInWithEmailAndPassword(email, password)
+  }
 
 	function logout() {
 		return auth.signOut()

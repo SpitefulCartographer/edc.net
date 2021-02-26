@@ -25,7 +25,8 @@ export default function Dashboard() {
                 <Card.Body>
                     <h2 className="text-center mb-2">Profile</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
-                    <b>Email: </b> {currentUser.email}
+                    <p><b>Email: </b> {currentUser.email}</p>
+                    <p><b>Username: </b> {currentUser.displayName}</p>
                     <Link to="/update-profile" className="btn btn-primary w-100">Update Profile</Link>
                 </Card.Body>
             </Card>
