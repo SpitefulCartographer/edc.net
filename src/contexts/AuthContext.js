@@ -16,6 +16,10 @@ export function AuthProvider({ children }) {
 		return auth.createUserWithEmailAndPassword(email, password)
 	}
 
+  function verification() {
+    return auth.currentUser.sendEmailVerification()
+  }
+
 	function login(email, password) {
 		/** Returns a promise that is used in LogIn.js */
 		return auth.signInWithEmailAndPassword(email, password) 
@@ -42,6 +46,7 @@ export function AuthProvider({ children }) {
 	const value = {
 		currentUser,
 		signup,
+    verification,
 		login,
 		logout,
 		resetPassword
