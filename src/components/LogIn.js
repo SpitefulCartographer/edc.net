@@ -3,13 +3,13 @@ import { Card, Form, Button, Alert } from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from 'react-router-dom'
 
-export default function SignUp() {
+export default function LogIn() {
 	const emailRef = useRef()
 	const passwordRef = useRef()
 	const { login } = useAuth()
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
-    const history = useHistory("")
+  const history = useHistory("")
 
 	async function handleSubmit(e) {
 		/** Prevent the component from refreshing */
@@ -19,7 +19,7 @@ export default function SignUp() {
 			setError("")
 			setLoading(true)
 			await login(emailRef.current.value, passwordRef.current.value)
-            history.push("/")
+      history.push("/")
 		} catch {
 			setError("Failed to login")
 		} finally {
