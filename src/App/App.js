@@ -1,11 +1,11 @@
-import SignUp from './SignUp'
+import SignUp from '../SignUp-Login/SignUp'
 import { Container } from 'react-bootstrap'
-import { AuthProvider } from '../contexts/AuthContext'
+import { AuthProvider } from '../shared/AuthContext'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Dashboard from './Dashboard'
-import LogIn from './LogIn'
+import Dashboard from '../Dashboard/Dashboard'
+import LogIn from '../SignUp-Login/LogIn'
 import PrivateRoute from './PrivateRoute'
-import PasswordReset from './ForgotPassword'
+import PasswordReset from '../SignUp-Login/ForgotPassword'
 
 function App() {
 	return (

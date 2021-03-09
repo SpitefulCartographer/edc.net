@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { auth, db } from '../firebase'
+const usersColRef = db.collection("users")
+const usernamesColRef = db.collection("usernames")
 
 const AuthContext = React.createContext()
 
-export function useAuth() {
-  return useContext(AuthContext)
-}
+export function useAuth() { return useContext(AuthContext) }
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
@@ -18,17 +18,28 @@ export function AuthProvider({ children }) {
      * The user's information is then written to the Firestore 
      * "users" collection.
     */
-    return auth.createUserWithEmailAndPassword(email, password)
-    .then(result => {
-      result.user.updateProfile({ displayName: username })
+    let u = username.trim().toLowerCase()
 
-      db.collection("users").doc(result.user.uid)
-      .set({
-        uid: result.user.uid,
-        email: email,
-        username: username
+    return auth.createUserWithEmailAndPassword(email, password)
+      .then(result => {
+        result.user.updateProfile({ displayName: username })
+
+        usernamesColRef.doc(u)
+        .set({
+          uid: result.user.uid
+        })
+
+        usersColRef.doc(result.user.uid)
+          .set({
+            email: email,
+            username: username
+          })
+
       })
-    })
+      .catch((e) => {
+        console.log(e);
+      })
+
   }
 
   function verification() {
@@ -38,6 +49,9 @@ export function AuthProvider({ children }) {
   function login(email, password) {
     /** Returns a promise that is used in LogIn.js */
     return auth.signInWithEmailAndPassword(email, password)
+      .catch((e) => {
+        return Promise.reject({ status: 400, code: "VERIFICATION_FAILED" })
+      })
   }
 
   function logout() {

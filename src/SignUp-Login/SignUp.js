@@ -1,16 +1,16 @@
 import React, { useRef, useState } from 'react'
 import { Card, Form, Button, Alert } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../shared/AuthContext'
 
 export default function SignUp() {
-  const emailRef = useRef()
-  const usernameRef = useRef()
-  const passwordRef = useRef()
-  const confirmPasswordRef = useRef()
+  const emailRef = useRef("")
+  const usernameRef = useRef("")
+  const passwordRef = useRef("")
+  const confirmPasswordRef = useRef("")
   const { signup, verification } = useAuth()
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const [ error, setError ] = useState("")
+  const [ loading, setLoading ] = useState(false)
   const history = useHistory()
 
   async function handleSubmit(e) {
@@ -21,6 +21,8 @@ export default function SignUp() {
       return setError("Passwords do not match.")
     } else if (passwordRef.current.value.length < 6) {
       return setError("Password should be at least 6 characters.")
+    } else if (usernameRef.current.value.length < 4) {
+      return setError("Username of at least 8 characters is required")
     }
 
     try {
